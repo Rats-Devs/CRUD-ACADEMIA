@@ -93,7 +93,7 @@ if (empty($erro)) {
         <div class="nav_header">
             <div class="nav_logo">
                 <a href="../index.php">
-                  <img src="../assets/logo-dark.png" alt="logo" class="logo-dark">
+                  <img src="../assets/gym.png" alt="logo" class="gym-logo">
                 </a>
             </div>
         </div>

@@ -40,6 +40,9 @@ nav{
     isolation: isolate;
     width: 100%;
     z-index: 9;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 30px;
+    margin-top: 40px;
 }
 
 .nav_header{
@@ -55,8 +58,12 @@ nav{
     max-width: 100px;
 }
 
-.nav_logo .logo-dark{
-    display: none;
+.nav_logo .gym-logo{
+    transition: 0.3s;
+}
+
+.nav_logo .gym-logo:hover{
+    transform: translateY(-3px);
 }
 
 .nav_menu_btn{
@@ -166,7 +173,6 @@ nav{
 }
 
 html, body {
-    min-height: 100vh;
     background: var(--cor-principal);
     font-family: 'Montserrat', sans-serif;
 }
@@ -182,6 +188,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 30px;
 }
 
 .card h2 {

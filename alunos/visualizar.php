@@ -41,7 +41,7 @@ if (empty($erro)) {
         <div class="nav_header">
             <div class="nav_logo">
                 <a href="../index.php">
-                    <img src="../assets/logo-dark.png" alt="logo" class="logo-dark">
+                    <img src="../assets/gym.png" alt="logo" class="gym-logo">
                 </a>
             </div>
         </div>
@@ -73,7 +73,7 @@ if (empty($erro)) {
                 <p>Data de cadastro: <?php echo htmlspecialchars($linha["DATA_CADASTRO_ALUNO"]); ?></p>
                 <p>Status: <?php echo htmlspecialchars($linha["STATUS_ALUNO"]); ?></p>
             </div>
-            <div class="header_btn">
+            <div class="btn-voltar">
                 <a href="cadastro.php" class="botao-voltar">Volte para os cadastros</a>
             </div>
             <?php endif; ?>

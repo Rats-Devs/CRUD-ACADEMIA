@@ -17,7 +17,7 @@
         <div class="nav_header">
             <div class="nav_logo">
                 <a href="index.php">
-                    <img src="assets/logo-dark.png" alt="logo" class="logo-dark">
+                    <img src="assets/gym.png" alt="logo" class="gym-logo">
                 </a>
             </div>
         </div>
@@ -30,7 +30,7 @@
 
     <header>
         <div class="header_image">
-            <img src="assets/lendo.png" alt="header" />
+            <img src="assets/exercitando.png" alt="header" />
         </div>
         <div class="header_content">
             <h2>ACADEMIA TOP</h2>
