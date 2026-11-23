@@ -1,6 +1,6 @@
 <?php
 
-require_once "conexao.php"; /*conexão com o banco de dados*/
+require_once "../conexao.php"; /*conexão com o banco de dados*/
 
 $id = $_GET["id"];
 
@@ -14,8 +14,8 @@ if (!filter_var($id, FILTER_VALIDATE_INT) || $id < 1) {/*! = NÃO; || = OU */
     exit;
 }
 
-$sql = "DELETE FROM EMPRESTIMOS
-        WHERE ID_EMPRESTIMOS = ?"; /*apague da tabela EMPRESTIMOS o registro cujo ID_EMPRESTIMOS seja igual ao valor que será colocado no ?*/
+$sql = "DELETE FROM ALUNO
+        WHERE ID_ALUNO = ?"; /*apague da tabela ALUNOS o registro cujo ID_ALUNOS seja igual ao valor que será colocado no ?*/
 
 $stmt = $conexao->prepare($sql);
 $stmt->bind_param("i", $id);

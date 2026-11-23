@@ -24,7 +24,7 @@
         
         <ul class="nav_link" id="nav-links">
             <li><a href="index.php">Home</a></li>
-            <li><a href="cadastro.php">Cadastro</a></li> 
+            <li><a href="alunos/cadastro.php">Cadastro de Alunos</a></li> 
         </ul>
     </nav>
 
@@ -34,13 +34,17 @@
         </div>
         <div class="header_content">
             <h2>ACADEMIA TOP</h2>
-            <h1>Livros para todos</h1>
+            <h1>Sistema de Gerenciamento de Academia</h1>
             <p>
-            Encontre novas histórias, amplie seus conhecimentos e aproveite a coleção de livros da escola.
-            Escolha seu livro, faça o seu empréstimo e aproveite a leitura.
+                Gerencie as informações da academia em um só lugar. Escolha abaixo o módulo que deseja acessar.
             </p>
             <div class="header_btn">
-                <a href="cadastro.php"><button>REGISTRE SEU EMPRÉSTIMO</button></a>
+                <a href="alunos/cadastro.php">Alunos</a>
+                <a href="professores/cadastro.php">Professores</a>
+                <a href="planos/cadastro.php">Planos</a>
+                <a href="matriculas/cadastro.php">Matrículas</a>
+                <a href="pagamentos/cadastro.php">Pagamentos</a>
+                <a href="treinos/cadastro.php">Treinos</a>
             </div>
         </div>
     </header>

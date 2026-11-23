@@ -1,21 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
-    --cor-principal:#F2E0D5;
-    --cor-secundaria:#402433;
-    --cor-destaque:#A67B56;
-    --white: #ffffff;
+    --cor-principal:#F8F6F7;
+    --cor-secundaria:#1C1B20;
+    --cor-destaque:#D88CA1;
+    --cor-destaque-hover:#AD657D;
+    --white:#FFFFFF;
+    --text-dark:#1C1B20;
     --max-width: 1200px;
 }
 
 *{
     padding: 0;
     margin: 0;
-    box-sizing: border-box; /*Indica como que a largura ou a altura de um elemento será calculada*/
+    box-sizing: border-box;
     font-family: "Montserrat", sans-serif;
 }
 
-/*Página inicial index.php*/
 img{
     display: flex;
     width: 100%;
@@ -33,8 +34,6 @@ ul{
 body{
     background-color: var(--cor-principal);
 }
-
-/*navbar*/
 
 nav{
     position: fixed;
@@ -88,7 +87,6 @@ nav{
     white-space: nowrap;
 }
 
-/*conteúdo da página*/
 header{
     max-width: var(--max-width);
     margin: auto;
@@ -131,12 +129,35 @@ header{
     text-align: center;
 }
 
-.header_btn{
+.header_btn {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
     margin-bottom: 5rem;
+    max-width: 750px;
+}
+
+.header_btn a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--cor-secundaria);
+    border-radius: 1rem;
+    transition: 0.3s;
     text-align: center;
 }
 
-.header_btn button{
+.header_btn a:hover {
+    background-color: var(--cor-destaque-hover);
+    transform: translateY(-3px);
+}
+
+.header_btn .botao-voltar{
+    display: inline-block;
     padding: 1rem 1.5rem;
     outline: none;
     border: none;
@@ -149,8 +170,8 @@ header{
     cursor: pointer;
 }
 
-.header_btn button:hover {
-    background-color: #2e1a25;
+.header_btn .botao-voltar:hover{
+    background-color: var(--cor-destaque-hover);
 }
 
 @media (width > 768px){
@@ -229,4 +250,18 @@ header{
     .header_content :is(h2, h1, p, .header_btn){
         text-align: left;
     }
+}
+
+.card-visualizar {
+    width: 50%;
+    margin: 30px;
+    padding: 30px;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.card-visualizar p {
+    margin: 15px 0;
 }

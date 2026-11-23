@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
-    --cor-principal:#F2E0D5;
-    --cor-secundaria:#402433;
-    --cor-destaque:#A67B56;
-    --white: #ffffff;
+    --cor-principal: #F8F6F7;
+    --cor-secundaria: #1C1B20;
+    --cor-destaque: #D88CA1;
+    --cor-destaque-hover: #AD657D;
+    --white: #FFFFFF;
+    --text-dark: #1C1B20;
     --max-width: 1200px;
 }
 
 *{
     padding: 0;
     margin: 0;
-    box-sizing: border-box; /*Indica como que a largura ou a altura de um elemento será calculada*/
+    box-sizing: border-box;
     font-family: "Montserrat", sans-serif;
 }
 
@@ -148,6 +150,7 @@ nav{
     .nav_link a:hover::after {
         width: 100%;
     }
+
     header{
         grid-template-columns: repeat(2, 1fr);
         align-items: center;
@@ -162,68 +165,67 @@ nav{
     }
 }
 
-/*conteudo da página, o formulário*/
 html, body {
-  min-height: 100vh;
-  background: var(--cor-principal);
-  font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    background: var(--cor-principal);
+    font-family: 'Montserrat', sans-serif;
 }
 
 .card {
-  width: 50%;
-  margin: 0 auto;
-  padding: 30px 90px 50px 90px;
-  border: 6px solid var(--cor-secundaria);
-  box-shadow: 20px 20px 0 #2c1923;
-  border-radius: 12px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 50%;
+    margin: 0 auto;
+    padding: 30px 90px 50px 90px;
+    border: 6px solid var(--cor-secundaria);
+    box-shadow: 20px 20px 0 var(--cor-destaque);
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card h2 {
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 0px;
-  text-transform: uppercase;
+    color: rgba(28, 27, 32, 0.3);
+    font-size: 0px;
+    text-transform: uppercase;
 }
 
 .card .linha {
-  position: relative;
-  width: 100%;
-  display: grid;
-  grid: auto / auto auto;
-  grid-template-columns: repeat(auto-fit,minmax(40%, 1fr));
-  grid-gap: 30px;
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid: auto / auto auto;
+    grid-template-columns: repeat(auto-fit,minmax(40%, 1fr));
+    grid-gap: 30px;
 }
 
 .card .linha .coluna {
-  position: relative;
-  width: 100%;
-  margin: 30px 20px 40px 0;
-  transition: 0.5s;
+    position: relative;
+    width: 100%;
+    margin: 30px 20px 40px 0;
+    transition: 0.5s;
 }
 
 .card .linha .form-group {
-  position: relative;
-  width: 100%;
-  height: 90px;
+    position: relative;
+    width: 100%;
+    height: 90px;
 }
 
 .card .linha .form-group input,
 .card .linha .form-group textarea {
-  position: absolute;
-  resize: none;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  outline: none;
-  font-size: 18px;
-  padding: 15px 0 20px 18px;
-  border: 5px solid var(--cor-secundaria);
-  box-shadow: 10px 10px 0 #2c1923;
-  color: var(--cor-secundaria);
-  border-radius: 8px;
+    position: absolute;
+    resize: none;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    font-size: 18px;
+    padding: 15px 0 20px 18px;
+    border: 5px solid var(--cor-secundaria);
+    box-shadow: 10px 10px 0 var(--cor-destaque);
+    color: var(--cor-secundaria);
+    border-radius: 8px;
 }
 
 .card .linha .form-group input::placeholder,
@@ -232,48 +234,48 @@ html, body {
 }
 
 .card .linha .form-group label {
-  line-height: 40px;
-  color: var(--cor-secundaria);
-  font-size: 24px;
-  margin: 0 0 0 30px;
-  display: block;
-  pointer-events: none;
+    line-height: 40px;
+    color: var(--cor-secundaria);
+    font-size: 24px;
+    margin: 0 0 0 30px;
+    display: block;
+    pointer-events: none;
 }
 
 .card .linha .form-group input:focus,
 .card .linha .form-group textarea:focus {
-  border: 5px solid var(--cor-secundaria);
-  transition: all 0.5s;
+    border: 5px solid var(--cor-destaque-hover);
+    transition: all 0.5s;
 }
 
 .card .linha input[type="submit"] {
-  border: 5px solid var(--cor-destaque);
-  box-shadow: 10px 10px 0 #79593f;
-  padding: 10px;
-  height: 100%;
-  width: 50%;
-  cursor: pointer;
-  outline: none;
-  background: transparent;
-  text-transform: uppercase;
-  color: var(--cor-destaque);
-  line-height: 40px;
-  font-size: 25px;
-  font-weight: 700;
-  border-radius: 30px;
-  transition: all 0.4s;
+    border: 5px solid var(--cor-destaque);
+    box-shadow: 10px 10px 0 var(--cor-destaque);
+    padding: 10px;
+    height: 100%;
+    width: 50%;
+    cursor: pointer;
+    outline: none;
+    background: transparent;
+    text-transform: uppercase;
+    color: var(--cor-destaque-hover);
+    line-height: 40px;
+    font-size: 25px;
+    font-weight: 700;
+    border-radius: 30px;
+    transition: all 0.4s;
 }
 
 .card .linha input[type="submit"]:hover {
-  border: 5px solid var(--cor-secundaria);
-  box-shadow: 10px 10px 0 #2c1923;
-  color: var(--cor-secundaria);
-  transition: all 0.4s;
+    border: 5px solid var(--cor-secundaria);
+    box-shadow: 10px 10px 0 var(--cor-destaque);
+    color: var(--cor-secundaria);
+    transition: all 0.4s;
 }
 
 .card .linha input[type="submit"]:active {
     transform: translateY(2px);
-    box-shadow: 5px 5px 0 #2c1923;
+    box-shadow: 5px 5px 0 var(--cor-destaque);
 }
 
 .card .linha .coluna:last-child{
@@ -283,24 +285,22 @@ html, body {
 }
 
 @media screen and (max-width: 900px) {
-  .card .linha {
-    grid-template-columns: repeat(auto-fit,minmax(70%, 1fr));
-  }
-  
-  .card {
-    padding: 20px;
-  }
-  
-  .card h2 {
-    font-size: 34px;
-  }
-  
-  .card .linha input[type="submit"] {
-    width: 100%;
-  }
-}
+    .card .linha {
+        grid-template-columns: repeat(auto-fit,minmax(70%, 1fr));
+    }
 
-/*tabelinha*/
+    .card {
+        padding: 20px;
+    }
+
+    .card h2 {
+        font-size: 34px;
+    }
+
+    .card .linha input[type="submit"] {
+        width: 100%;
+    }
+}
 
 .tabela-wrapper {
     margin-top: 50px;
@@ -314,14 +314,12 @@ html, body {
     font-family: "Montserrat", sans-serif;
 }
 
-/*cor e titulos(id, titulo, descrição etc)*/
 .table-header-row {
     background-color: var(--cor-secundaria);
     color: var(--cor-principal);
     text-align: left;
 }
 
-/*linha para separar*/
 .table-data-row {
     border-bottom: 2px solid var(--cor-secundaria);
 }
@@ -331,7 +329,6 @@ html, body {
     box-sizing: border-box;
 }
 
-/*ações ficam embaixo uma da outra*/
 .actions-container {
     display: flex;
     flex-direction: column;
@@ -340,15 +337,14 @@ html, body {
 
 .table-td {
     padding: 16px;
-    vertical-align: center; /*serve para o texto ficar no centro da abela*/
+    vertical-align: middle;
 }
 
-/*estilo dos links de ações*/
 .action-link {
     font-weight: 600;
     color: var(--text-dark);
     position: relative;
-    display: inline-block; /*alinha e limita a largura*/
+    display: inline-block;
     text-decoration: none;
 }
 
@@ -359,23 +355,21 @@ html, body {
     left: 0;
     width: 0%;
     height: 2px;
-    background-color: var(--cor-secundaria);
+    background-color: var(--cor-destaque-hover);
     transition: width 0.3s ease;
 }
 
 .action-link:hover::after {
-    width: 40%; /*esse valor em % determina o tamanho da linha */
+    width: 40%;
 }
 
 .delete-link {
-    color: #ff0000;
+    color: #C62828;
 }
 
 .delete-link:hover::after {
-    background-color: red;
+    background-color: #C62828;
 }
-
-/*estilo da mensagem se der erro de registro*/
 
 .mensagem-erro {
     text-align: center;
@@ -384,11 +378,11 @@ html, body {
     font-size: 20px;
     font-weight: 600;
     color: var(--cor-secundaria);
-    border: 3px solid var(--cor-secundaria);
+    border: 3px solid var(--cor-destaque-hover);
     border-radius: 8px;
+    background-color: #F8E5EB;
 }
 
-/*estilo da mensagem se estiver vazio*/
 .mensagem-vazio{
     text-align: center;
     font-size: 20px;
