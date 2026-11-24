@@ -76,7 +76,7 @@
 
     <div class="coluna">
       <div class="form-group">
-        <label>Data de nascimento do Aluno</label>
+        <label>Data de nasc do Aluno</label>
         <input type="date" name="data_nascimento_aluno" required>
       </div>
     </div>

@@ -1,34 +1,83 @@
 <?php 
-    require_once "../conexao.php";/*quando precisamos acessar o banco utilizamos isso e a variável $conexao permite executar comandos no banco*/
+  require_once "../conexao.php";/*quando precisamos acessar o banco utilizamos isso e a variável $conexao permite executar comandos no banco*/
 
-    $sql = "SELECT ID_ALUNO, NOME_ALUNO FROM ALUNO ORDER BY NOME_ALUNO";
-    /*busca os alunos cadastrados e organiza os nomes em ordem alfabética.*/
+  $sql = "SELECT ID_ALUNO, NOME_ALUNO FROM ALUNO ORDER BY NOME_ALUNO";
+  /*busca os alunos cadastrados e organiza os nomes em ordem alfabética.*/
 
-    $resultado = $conexao->query($sql);/*preenche o <select> do formulário*/
+  $resultado = $conexao->query($sql);/*preenche o <select> do formulário*/
 
-    /*MySql -> Select * -> variável $resultado*/
+  $sqlAvaliacoes = "SELECT
+    A.*,
+    AL.NOME_ALUNO
+    FROM AVALIACAO_FISICA A
+    INNER JOIN ALUNO AL
+    ON A.ID_ALUNO_FK = AL.ID_ALUNO
+    ORDER BY A.DATA_AVALIACAO DESC";
+  /*
+    Segunda consulta:
+    A.* pega todas as colunas da tabela avaliações
+    AL.NOME_ALUNO pega especificamente o nome do aluno
+
+    FROM AVALIACAO_FISICA A:
+    a tabela principal da consulta será AVALIACAO_FISICA e A é um apelido
+    em vez de escrever AVALIACAO_FISICA.PESO, pode escrever A.PESO
+
+    INNER JOIN ALUNO AL:
+    adiciona a tabela ALUNO à consulta
+    AL é o apelido dessa tabela
+    precisa da adição dessa tabela pq a avaliação guarda ID_ALUNO_FK e não necessariamente o nome do aluno
+
+    ON A.ID_ALUNO_FK = AL.ID_ALUNO:
+    condição do relacionamento, basicamente diz:
+    -Pegue o ID_ALUNO_FK da avaliação.
+    -Compare com o ID_ALUNO da tabela de alunos.
+    -Quando forem iguais, combine os registros.
+
+  */
+
+  $resultadoAvaliacoes = $conexao->query($sqlAvaliacoes);
+  /*executa a consulta no PHP*/
 
   if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    
+    $id_aluno = $_POST["id_aluno_fk"];
 
-    $nome = $_POST["nome_aluno"];
-    $cpf = $_POST["cpf_aluno"];
-    $data_nascimento = $_POST["data_nascimento_aluno"];
-    $telefone = $_POST["telefone_aluno"];
-    $email = $_POST["email_aluno"];
-    /*recebem os dado enviado pelo formulário nos campos e atribui a variável $nome, $cpf etc*/
+    $peso = $_POST["peso"];
+    $altura = $_POST["altura"];
 
-      $sql = "INSERT INTO ALUNO
-      (NOME_ALUNO, CPF_ALUNO, DATA_NASCIMENTO_ALUNO, TELEFONE_ALUNO, EMAIL_ALUNO)
-      VALUES (?, ?, ?, ?, ?)"; /*os ? são espaços reservados para os valores*/
+    $percentualGordura = $_POST["percentual_gordura"];
+    $massaMagra = $_POST["massa_magra"];
+
+    $braco = $_POST["braco"];
+    $cintura = $_POST["cintura"];
+    $quadril = $_POST["quadril"];
+    /*recebem os dado enviado pelo formulário nos campos e atribui as variáveis*/
+
+    $percentualGordura = $percentualGordura !== "" ? $percentualGordura : null;
+    $massaMagra = $massaMagra !== "" ? $massaMagra : null;
+
+    $braco = $braco !== "" ? $braco : null;
+    $cintura = $cintura !== "" ? $cintura : null;
+    $quadril = $quadril !== "" ? $quadril : null;
+    /* 
+      tratamento de NULL
+      exemplo: $braco = $braco !== "" ? $braco : null;
+      se $braco for diferente de "", vai manter o valor recebido
+      se $braco for igual a "", transforma em null
+    */
+
+    $sql = "INSERT INTO AVALIACAO_FISICA
+    (ID_ALUNO_FK, PESO, ALTURA, PERCENTUAL_GORDURA, MASSA_MAGRA, BRACO, CINTURA, QUADRIL)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; /*os ? são espaços reservados para os valores*/
 
       $stmt = $conexao->prepare($sql);
+      /*prepara a consulta*/
 
-      $stmt->bind_param("sssss", $nome, $cpf, $data_nascimento, $telefone, $email);
-      /*esse comando liga as variáveis aos "?" e sssss = string, string, string, string, string*/
+      $stmt->bind_param("iddddddd", $id_aluno, $peso, $altura, $percentualGordura, $massaMagra, $braco, $cintura, $quadril);
+      /*esse comando liga as variáveis aos "?" e i = inteiro, d = decimal, "iddddddd"*/
 
-      $stmt->execute();/*executa o insert*/
+      $stmt->execute();
+      /*executa o insert*/
 
       header("Location: cadastro.php");/*redireciona o usuário novamente para o cadastro*/
       exit;/*para a execução*/
@@ -57,7 +106,7 @@
           
         <ul class="nav_link" id="nav-links">
             <li><a href="../index.php">Home</a></li>
-            <li><a href="cadastro.php">Cadastro de alunos</a></li> 
+            <li><a href="cadastro.php">Avaliações Físicas</a></li> 
         </ul>
     </nav>
 
@@ -66,35 +115,68 @@
   <div class="linha">
     <div class="coluna">
       <div class="form-group">
-        <label>Nome do Aluno</label>
-        <input type="text" name="nome_aluno" placeholder="Digite o nome do aluno" required>
-      </div>
-    </div>
-    <div class="coluna">
-      <div class="form-group">
-        <label>CPF aluno</label>
-        <input type="text" id="cpf" name="cpf_aluno" placeholder="Digite o CPF do aluno" maxlenght="14" required>
+        <label>Aluno</label>
+
+        <select name="id_aluno_fk" required>
+            <option value="">Selecione o aluno</option>
+
+            <?php
+            while ($aluno = $resultado->fetch_assoc()) {
+                echo "<option value='" . $aluno["ID_ALUNO"] . "'>" . $aluno["NOME_ALUNO"] . "</option>";
+            }
+            ?>
+            <!--Vai percorrer os registros da tabela ALUNO, adicionando o ID do aluno no value e exibindo o nome dele na opção-->
+        </select>
       </div>
     </div>
 
     <div class="coluna">
       <div class="form-group">
-        <label>Data de nascimento do Aluno</label>
-        <input type="date" name="data_nascimento_aluno" required>
+        <label>Peso (kg)</label>
+        <input type="number" name="peso" min="0.01" max="635" step="0.01" required>
+        <!--step permite valores com duas casas decimais-->
       </div>
     </div>
 
     <div class="coluna">
       <div class="form-group">
-        <label>Telefone do aluno</label>
-        <input type="tel" id="telefone" name="telefone_aluno" placeholder="ex: (11) 99999-9999" maxlenght="15" required>
+        <label>Altura (m)</label>
+        <input type="number" name="altura" min="0.50" max="2.72" step="0.01" required>
       </div>
     </div>
 
     <div class="coluna">
       <div class="form-group">
-        <label>Email do aluno</label>
-        <input type="email" name="email_aluno" placeholder="ex: juca@gmail.com" required>
+        <label>Percentual de gordura (%)</label>
+        <input type="number" name="percentual_gordura" min="0" max="100" step="0.01">
+      </div>
+    </div>
+
+    <div class="coluna">
+      <div class="form-group">
+        <label>Massa magra (kg)</label>
+        <input type="number" name="massa_magra" min="0.01" max="635" step="0.01">
+      </div>
+    </div>
+
+    <div class="coluna">
+      <div class="form-group">
+        <label>Braço (cm)</label>
+        <input type="number" name="braco" min="0.01" max="200" step="0.01">
+      </div>
+    </div>
+
+    <div class="coluna">
+      <div class="form-group">
+        <label>Cintura (cm)</label>
+        <input type="number" name="cintura" min="0.01" max="300" step="0.01">
+      </div>
+    </div>
+
+    <div class="coluna">
+      <div class="form-group">
+        <label>Quadril (cm)</label>
+        <input type="number" name="quadril" min="0.01" max="300" step="0.01">
       </div>
     </div>
 
@@ -116,81 +198,56 @@
             <thead>
 <tr class="table-header-row">
     <th class="table-th">ID</th>
-    <th class="table-th">Nome</th>
-    <th class="table-th">CPF</th>
-    <th class="table-th">Nascimento</th>
-    <th class="table-th">Telefone</th>
-    <th class="table-th">E-mail</th>
-    <th class="table-th">Cadastro</th>
-    <th class="table-th">Status</th>
+    <th class="table-th">Aluno</th>
+    <th class="table-th">Peso (kg)</th>
+    <th class="table-th">Altura (m)</th>
+    <th class="table-th">Gordura (%)</th>
+    <th class="table-th">Massa magra (kg)</th>
+    <th class="table-th">Braço (cm)</th>
+    <th class="table-th">Cintura (cm)</th>
+    <th class="table-th">Quadril (cm)</th>
+    <th class="table-th">Data</th>
     <th class="table-th">Ações</th>
 </tr>
-            </thead>
-            <tbody>
-  <?php
-    if ($resultado->num_rows > 0){
-      while($linha = $resultado->fetch_assoc()){ /*enquanto tiver outra linha no resultado, pegue essa linha e coloque dentro da variável $linha*/
-  ?>  
-  <tr class="table-data-row">
-      <td class="table-td"><?php echo htmlspecialchars($linha["ID_ALUNO"]); ?></td>
-      <td class="table-td"><?php echo htmlspecialchars($linha["NOME_ALUNO"]); ?></td>
-      <td class="table-td"><?php echo htmlspecialchars($linha["CPF_ALUNO"]); ?></td>
-      <td class="table-td"><?php echo htmlspecialchars($linha["DATA_NASCIMENTO_ALUNO"]); ?></td>
-      <td class="table-td"><?php echo htmlspecialchars($linha["TELEFONE_ALUNO"]); ?></td>
-      <td class="table-td"><?php echo htmlspecialchars($linha["EMAIL_ALUNO"]); ?></td>
-      <td class="table-td"><?php echo htmlspecialchars($linha["DATA_CADASTRO_ALUNO"]); ?></td>
-      <td class="table-td"><?php echo htmlspecialchars($linha["STATUS_ALUNO"]); ?></td>
-    <td class="table-td">
-      <div class="actions-container">
-        <a href="visualizar.php?id=<?php echo $linha["ID_ALUNO"]; ?>" class="action-link">Visualizar</a> <br>
-        <a href="editar.php?id=<?php echo $linha["ID_ALUNO"]; ?>" class="action-link">Editar</a> <br>
-        <a href="deletar.php?id=<?php echo $linha["ID_ALUNO"]; ?>" class="action-link delete-link" onclick="return confirm('Deseja excluir?')">Deletar</a>
-      </div>
-    </td>
-  </tr>
-      <?php
-          }
-        } else {
-      ?>
-        <tr>
-          <td class="mensagem-vazio" colspan="9">Nenhum Aluno cadastrado.</td>
-        </tr>
-      <?php
-        }
-      ?>
-            </tbody>
-        </table>     
-    </div>      
+</thead>
 
-<script>
-const campoCPF = document.getElementById("cpf");/*guarda o campo de CPF na variável campoCPF para poder manipular*/
-
-campoCPF.addEventListener("input", function() {/*adiciona um evento que sempre que alguem digitar, apaagar ou alterar o CPF essa função sera executada*/
-    let cpf = campoCPF.value.replace(/\D/g, "");/*substitui oq não for número por "", ou seja, remove*/
-
-    cpf = cpf.substring(0, 11);/*limita a entrada de numeros para 11*/
-
-    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
-    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
-    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-    /*adiciona os pontos e o hifen*/
-
-    campoCPF.value = cpf;
-});
-
-const campoTelefone = document.getElementById("telefone");
-
-campoTelefone.addEventListener("input", function() {
-    let telefone = campoTelefone.value.replace(/\D/g, "");
-
-    telefone = telefone.substring(0, 11);
-
-    telefone = telefone.replace(/^(\d{2})(\d)/, "($1) $2");
-    telefone = telefone.replace(/(\d{5})(\d)/, "$1-$2");
-
-    campoTelefone.value = telefone;
-});
-</script>
-
+<tbody>
+        <?php
+        if ($resultadoAvaliacoes->num_rows > 0) {
+            while ($linha = $resultadoAvaliacoes->fetch_assoc()) {
+        ?>
+          <tr class="table-data-row">
+            <td class="table-td"><?php echo htmlspecialchars($linha["ID_AVALIACAO"]); ?></td>
+            <td class="table-td"><?php echo htmlspecialchars($linha["NOME_ALUNO"]); ?></td>
+            <td class="table-td"><?php echo htmlspecialchars($linha["PESO"]); ?></td>
+            <td class="table-td"><?php echo htmlspecialchars($linha["ALTURA"]); ?></td>
+            <td class="table-td"><?php echo htmlspecialchars($linha["PERCENTUAL_GORDURA"] ?? "-"); ?></td>
+            <td class="table-td"><?php echo htmlspecialchars($linha["MASSA_MAGRA"]  ?? "-"); ?></td>
+            <td class="table-td"><?php echo htmlspecialchars($linha["BRACO"]  ?? "-"); ?></td>
+            <td class="table-td"><?php echo htmlspecialchars($linha["CINTURA"]  ?? "-"); ?></td>
+            <td class="table-td"><?php echo htmlspecialchars($linha["QUADRIL"]  ?? "-"); ?></td>
+            <td class="table-td"><?php echo htmlspecialchars($linha["DATA_AVALIACAO"]); ?></td>
+            <!-- ?? "-": Se existir um valor ele será utilizado, se for NULL vai ser utilizado "-" -->
+          <td class="table-td">
+            <div class="actions-container">
+              <a href="visualizar.php?id=<?php echo $linha["ID_AVALIACAO"]; ?>" class="action-link">Visualizar</a> <br>
+              <a href="editar.php?id=<?php echo $linha["ID_AVALIACAO"]; ?>" class="action-link">Editar</a> <br>
+              <a href="deletar.php?id=<?php echo $linha["ID_AVALIACAO"]; ?>" class="action-link delete-link" onclick="return confirm('Deseja excluir?')">Deletar</a>
+            </div>
+          </td>
+          </tr>
+            <?php
+                }
+            } else {
+            ?>
+                <tr>
+                    <td class="mensagem-vazio" colspan="11">Nenhuma avaliação cadastrada.</td>
+                </tr>
+            <?php
+            }
+            ?>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>

@@ -6,7 +6,7 @@ $erro = null;
 
 $id = $_GET["id"] ?? null;
 /*exemplo: tenho um aluno com ID: 5 e clico para visualizar,
-abra o visualizar.php e quero o registro de ID 5, isso que esse comando faz*/
+o visualizar.php recebe esse ID pela URL e busca a avaliação*/
 
 if (!filter_var($id, FILTER_VALIDATE_INT) || $id < 1) {
     $erro = "ID inválido.";

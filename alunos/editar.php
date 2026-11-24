@@ -6,22 +6,22 @@ $erro = null;
 $id = $_GET["id"] ?? null;
 
 if (!filter_var($id, FILTER_VALIDATE_INT) || $id < 1) {
-    $erro = "ID inválido.";
+  $erro = "ID inválido.";
 }
 
 if (empty($erro)) {
-    $sql = "SELECT * FROM ALUNO WHERE ID_ALUNO = ?";
+  $sql = "SELECT * FROM ALUNO WHERE ID_ALUNO = ?";
 
-    $stmt = $conexao->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
+  $stmt = $conexao->prepare($sql);
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
 
-    $resultado = $stmt->get_result();
-    $linha = $resultado->fetch_assoc();
+  $resultado = $stmt->get_result();
+  $linha = $resultado->fetch_assoc();
 
-    if (empty($linha)) {
-        $erro = "Aluno não encontrado.";
-    }
+  if (empty($linha)) {
+    $erro = "Aluno não encontrado.";
+  }
 }
 
   if (empty($erro) && $_SERVER["REQUEST_METHOD"] == "POST") {
