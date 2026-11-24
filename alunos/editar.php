@@ -100,7 +100,7 @@ if (empty($erro)) {
 
         <ul class="nav_link" id="nav-links">
             <li><a href="../index.php">Home</a></li>
-            <li><a href="cadastro.php">Cadastro</a></li> 
+            <li><a href="cadastro.php">Cadastro de alunos</a></li> 
         </ul>
     </nav>
 
@@ -117,7 +117,7 @@ if (empty($erro)) {
       <div class="coluna">
         <div class="form-group">
           <label>CPF</label>
-              <input type="text" name="cpf_aluno" value="<?php echo htmlspecialchars($linha["CPF_ALUNO"]); ?>" maxlength="14" required>
+              <input type="text" id="cpf" name="cpf_aluno" value="<?php echo htmlspecialchars($linha["CPF_ALUNO"]); ?>" maxlength="14" required>
         </div>
       </div>
 
@@ -131,7 +131,7 @@ if (empty($erro)) {
       <div class="coluna">
         <div class="form-group">
           <label>Telefone</label>
-          <input type="tel" name="telefone_aluno" value="<?php echo htmlspecialchars($linha["TELEFONE_ALUNO"]); ?>" maxlength="15">
+          <input type="tel" id="telefone" name="telefone_aluno" value="<?php echo htmlspecialchars($linha["TELEFONE_ALUNO"]); ?>" maxlength="15">
         </div>
       </div>
 
@@ -155,5 +155,34 @@ if (empty($erro)) {
     </div>
 <?php endif; ?>
 
+<script>
+const campoCPF = document.getElementById("cpf");/*guarda o campo de CPF na variável campoCPF para poder manipular*/
+
+campoCPF.addEventListener("input", function() {/*adiciona um evento que sempre que alguem digitar, apaagar ou alterar o CPF essa função sera executada*/
+    let cpf = campoCPF.value.replace(/\D/g, "");/*substitui oq não for número por "", ou seja, remove*/
+
+    cpf = cpf.substring(0, 11);/*limita a entrada de numeros para 11*/
+
+    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    /*adiciona os pontos e o hifen*/
+
+    campoCPF.value = cpf;
+});
+
+const campoTelefone = document.getElementById("telefone");
+
+campoTelefone.addEventListener("input", function() {
+    let telefone = campoTelefone.value.replace(/\D/g, "");
+
+    telefone = telefone.substring(0, 11);
+
+    telefone = telefone.replace(/^(\d{2})(\d)/, "($1) $2");
+    telefone = telefone.replace(/(\d{5})(\d)/, "$1-$2");
+
+    campoTelefone.value = telefone;
+});
+</script>
 </body>
 </html>

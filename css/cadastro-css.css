@@ -397,3 +397,22 @@ html, body {
     padding-top: 50px;
     color: var(--cor-secundaria);
 }
+
+/*avaliações físicas*/
+.card .linha .form-group select {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    font-size: 18px;
+    padding: 15px 0 20px 18px;
+    border: 5px solid var(--cor-secundaria);
+    box-shadow: 10px 10px 0 var(--cor-destaque);
+    color: var(--cor-secundaria);
+    border-radius: 8px;
+}
+
+.card .linha .form-group select:focus {
+    border: 5px solid var(--cor-destaque-hover);
+}

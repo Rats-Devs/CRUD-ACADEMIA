@@ -48,7 +48,7 @@ if (empty($erro)) {
         
         <ul class="nav_link" id="nav-links">
             <li><a href="../index.php">Home</a></li>
-            <li><a href="cadastro.php">Cadastro</a></li> 
+            <li><a href="cadastro.php">Cadastro de alunos</a></li> 
         </ul>
     </nav>
 

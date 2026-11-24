@@ -24,7 +24,6 @@
         
         <ul class="nav_link" id="nav-links">
             <li><a href="index.php">Home</a></li>
-            <li><a href="alunos/cadastro.php">Cadastro de Alunos</a></li> 
         </ul>
     </nav>
 
@@ -45,6 +44,7 @@
                 <a href="matriculas/cadastro.php">Matrículas</a>
                 <a href="pagamentos/cadastro.php">Pagamentos</a>
                 <a href="treinos/cadastro.php">Treinos</a>
+                <a href="avaliacoes/cadastro.php">Avaliações Físicas</a>
             </div>
         </div>
     </header>
