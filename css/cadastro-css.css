@@ -503,3 +503,43 @@ form > input[type="submit"]:hover {
         grid-template-columns: 1fr;
     }
 }
+
+/* Ajustes exclusivos das ações da tabela de treinos */
+.acoes-treino {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.acoes-treino a {
+    color: var(--cor-texto-escuro);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.acoes-treino a:hover {
+    color: var(--cor-destaque);
+    text-decoration: underline;
+}
+
+.acoes-treino form {
+    margin: 0;
+}
+
+.acoes-treino button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    background-color: var(--cor-destaque);
+    color: white;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.acoes-treino button:hover {
+    background-color: var(--cor-destaque-hover);
+}
