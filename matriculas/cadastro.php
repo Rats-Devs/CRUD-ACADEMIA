@@ -23,8 +23,6 @@
 
 $resultado_matriculas = $conexao->query($sql_matriculas);
 
-$resultado_matriculas = $conexao->query($sql_matriculas);
-
   if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $idAluno = $_POST["id_aluno_fk"];

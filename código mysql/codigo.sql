@@ -48,6 +48,12 @@ CREATE TABLE MATRICULA (
     FOREIGN KEY (ID_PLANO_FK) REFERENCES PLANO (ID_PLANO)
 );
 
+/*
+A gente utiliza as chaves estrangeiras porque elas permitem relacionar as tabelas através dos IDs. 
+Assim, em vez de repetir o nome do aluno e do plano em cada matrícula, armazenamos seus identificadores. 
+Isso evita duplicação de informações e facilita a manutenção dos dados.
+*/
+
 CREATE TABLE PAGAMENTO (
     ID_PAGAMENTO INT PRIMARY KEY AUTO_INCREMENT,
     ID_MATRICULA_FK INT NOT NULL,
@@ -96,6 +102,12 @@ CREATE TABLE TREINO_EXERCICIO (
     FOREIGN KEY (ID_EXERCICIOS_FK) REFERENCES EXERCICIOS (ID_EXERCICIOS)
 );
 
+/*
+um treino ele pode ter vários exercícios e um exercício ele pode aparecer em vários treinos. 
+Então a gente criou o treino_exercício pra ser como um intermediário pq cada um dos exercícios 
+pode ter diferentes séries, repetições, cargas e observações e ordens para um aluno específico
+*/
+
 CREATE TABLE AVALIACAO_FISICA (
     ID_AVALIACAO INT PRIMARY KEY AUTO_INCREMENT,
     ID_ALUNO_FK INT NOT NULL,
@@ -110,5 +122,11 @@ CREATE TABLE AVALIACAO_FISICA (
 
     FOREIGN KEY (ID_ALUNO_FK) REFERENCES ALUNO (ID_ALUNO)
 );
+
+/*
+cada avaliação física é armazenada como um novo registro na tabela AVALIACAO_FISICA, 
+com um ID próprio e uma chave estrangeira que identifica o aluno. 
+Então, quando o aluno faz uma nova avaliação, ela é cadastrada separadamente, mantendo o histórico das avaliações anteriores.
+*/
 
 SHOW TABLES;
