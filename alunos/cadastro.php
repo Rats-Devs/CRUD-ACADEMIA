@@ -70,7 +70,7 @@
     <div class="coluna">
       <div class="form-group">
         <label>CPF aluno</label>
-        <input type="text" id="cpf" name="cpf_aluno" placeholder="Digite o CPF do aluno" maxlenght="14" required>
+        <input type="text" id="cpf" name="cpf_aluno" placeholder="Digite o CPF do aluno" maxlength="14" required>
       </div>
     </div>
 
@@ -84,7 +84,7 @@
     <div class="coluna">
       <div class="form-group">
         <label>Telefone do aluno</label>
-        <input type="tel" id="telefone" name="telefone_aluno" placeholder="ex: (11) 99999-9999" maxlenght="15" required>
+        <input type="tel" id="telefone" name="telefone_aluno" placeholder="ex: (11) 99999-9999" maxlength="15" required>
       </div>
     </div>
 

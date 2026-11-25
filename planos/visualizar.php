@@ -77,7 +77,9 @@ if (!$plano) {
 
     </div>
 
-    <a href="cadastro.php">Voltar</a>
+            <div class="btn-voltar">
+                <a href="cadastro.php" class="botao-voltar">Volte para os cadastros</a>
+            </div>
 
 </div>
 </header>

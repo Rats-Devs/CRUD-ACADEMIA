@@ -153,9 +153,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </td>
 
     <td class="table-td">
-        <a href="visualizar.php?id=<?php echo $plano["ID_PLANO"]; ?>">Visualizar</a>
+        <div class="actions-container">
+        <a href="visualizar.php?id=<?php echo $plano["ID_PLANO"]; ?>" class="action-link">Visualizar</a>
 
-        <a href="editar.php?id=<?php echo $plano["ID_PLANO"]; ?>">Editar</a>
+        <a href="editar.php?id=<?php echo $plano["ID_PLANO"]; ?>" class="action-link">Editar</a>
 
     <form action="deletar.php" method="POST"
       onsubmit="return confirm('Deseja excluir este plano?')">
@@ -163,8 +164,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="hidden" name="id"
            value="<?php echo $plano['ID_PLANO']; ?>">
 
-    <button type="submit">Excluir</button>
-
+    <button type="submit" class="action-link delete-link">Excluir</button>
+</div>
     </form>
     </td>
 
