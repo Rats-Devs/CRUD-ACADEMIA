@@ -240,8 +240,6 @@ $atuais = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     </ul>
 </nav>
 
-<h2>Editar Treino</h2>
-
 <?php if ($erro != ""): ?>
     <p><?php echo htmlspecialchars($erro); ?></p>
 <?php endif; ?>
@@ -310,8 +308,6 @@ $atuais = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
 </div>
 </div>
-
-<h3>Exercícios</h3>
 
 <div id="lista-exercicios">
 

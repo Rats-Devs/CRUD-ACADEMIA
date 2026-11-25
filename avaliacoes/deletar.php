@@ -1,27 +1,37 @@
 <?php
 
-require_once "../conexao.php"; /* conexão com o banco de dados */
+require_once "../conexao.php";
 
-$id = $_GET["id"] ?? null;
-
-if (!filter_var($id, FILTER_VALIDATE_INT) || $id < 1) { /* ! = NÃO; || = OU */
-        /*
-        se o id NÃO for um inteiro válido
-        OU se o id for menor que 1,
-        a validação vai falhar
-        */
-    echo "ID inválido.";
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    header("Location: cadastro.php");
     exit;
 }
 
-$sql = "DELETE FROM AVALIACAO_FISICA
-        WHERE ID_AVALIACAO = ?";/*apague da tabela AVALIACAO_FISICA o registro cujo ID_AVALIACAO seja igual ao valor que será colocado no ?*/
+$id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 
+if (!$id || $id < 1) {
+    header("Location: cadastro.php?erro=id_invalido");
+    exit;
+}
 
-$stmt = $conexao->prepare($sql);
-$stmt->bind_param("i", $id);
-$stmt->execute();
+try {
 
-header("Location: cadastro.php");
-exit;
+    $sql = "DELETE FROM AVALIACAO_FISICA
+            WHERE ID_AVALIACAO = ?";
+
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->close();
+
+    header("Location: cadastro.php?sucesso=excluido");
+    exit;
+
+} catch (mysqli_sql_exception $e) {
+
+    header("Location: cadastro.php?erro=exclusao");
+    exit;
+
+}
+
 ?>

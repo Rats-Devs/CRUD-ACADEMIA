@@ -43,6 +43,7 @@
                 <a href="planos/cadastro.php">Planos</a>
                 <a href="matriculas/cadastro.php">Matrículas</a>
                 <a href="pagamentos/cadastro.php">Pagamentos</a>
+                <a href="exercicios/cadastro.php">Exercícios</a>
                 <a href="treinos/cadastro.php">Treinos</a>
                 <a href="avaliacoes/cadastro.php">Avaliações Físicas</a>
             </div>

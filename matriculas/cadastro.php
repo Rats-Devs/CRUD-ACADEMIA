@@ -151,6 +151,22 @@ $resultado_matriculas = $conexao->query($sql_matriculas);
     </div>
 </form>
 
+<?php if (isset($_GET["erro"]) && $_GET["erro"] == "matricula_vinculada"): ?>
+    <p class="mensagem-erro">Não é possível excluir: esta matrícula possui pagamentos vinculados.</p>
+<?php endif; ?>
+
+<?php if (isset($_GET["erro"]) && $_GET["erro"] == "exclusao"): ?>
+    <p class="mensagem-erro">Não foi possível excluir a matrícula.</p>
+<?php endif; ?>
+
+<?php if (isset($_GET["erro"]) && $_GET["erro"] == "matricula_nao_encontrada"): ?>
+    <p class="mensagem-erro">Matrícula não encontrada.</p>
+<?php endif; ?>
+
+<?php if (isset($_GET["erro"]) && $_GET["erro"] == "id_invalido"): ?>
+    <p class="mensagem-erro">ID da matrícula inválido.</p>
+<?php endif; ?>
+
 <div class="tabela-wrapper">
     <table class="table-content">
         <thead>
@@ -180,7 +196,10 @@ $resultado_matriculas = $conexao->query($sql_matriculas);
                             <div class="actions-container">
                                 <a href="visualizar.php?id=<?php echo $linha["ID_MATRICULA"]; ?>" class="action-link">Visualizar</a>
                                 <a href="editar.php?id=<?php echo $linha["ID_MATRICULA"]; ?>" class="action-link">Editar</a>
-                                <a href="deletar.php?id=<?php echo $linha["ID_MATRICULA"]; ?>" class="action-link delete-link" onclick="return confirm('Deseja excluir?')">Deletar</a>
+                            <form action="deletar.php" method="POST" onsubmit="return confirm('Deseja excluir esta matrícula?')">
+                                <input type="hidden" name="id" value="<?php echo $linha["ID_MATRICULA"]; ?>">
+                                <button type="submit" class="action-link delete-link">Deletar</button>
+                            </form>
                             </div>
                         </td>
                     </tr>

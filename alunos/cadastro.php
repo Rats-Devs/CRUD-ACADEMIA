@@ -108,6 +108,18 @@
     </div>
   <?php endif; ?>
 
+<?php if (isset($_GET["erro"]) && $_GET["erro"] == "aluno_vinculado"): ?>
+    <p class="mensagem-erro">
+        Não é possível excluir: este aluno possui matrículas, treinos ou avaliações físicas vinculadas.
+    </p>
+<?php endif; ?>
+
+<?php if (isset($_GET["erro"]) && $_GET["erro"] == "exclusao"): ?>
+    <p class="mensagem-erro">
+        Não foi possível excluir o aluno.
+    </p>
+<?php endif; ?>
+
     <div class="tabela-wrapper">
         <table class="table-content">
             <thead>
@@ -141,7 +153,10 @@
       <div class="actions-container">
         <a href="visualizar.php?id=<?php echo $linha["ID_ALUNO"]; ?>" class="action-link">Visualizar</a> <br>
         <a href="editar.php?id=<?php echo $linha["ID_ALUNO"]; ?>" class="action-link">Editar</a> <br>
-        <a href="deletar.php?id=<?php echo $linha["ID_ALUNO"]; ?>" class="action-link delete-link" onclick="return confirm('Deseja excluir?')">Deletar</a>
+      <form action="deletar.php" method="POST" onsubmit="return confirm('Deseja excluir?')">
+          <input type="hidden" name="id" value="<?php echo $linha["ID_ALUNO"]; ?>">
+          <button type="submit" class="action-link delete-link">Deletar</button>
+      </form>
       </div>
     </td>
   </tr>

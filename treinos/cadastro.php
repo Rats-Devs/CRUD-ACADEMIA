@@ -238,8 +238,6 @@ $treinos = $conexao->query($sql);
     </ul>
 </nav>
 
-<h2>Cadastro de Treinos</h2>
-
 <!-- Mensagem de erro -->
 <?php if ($erro != ""): ?>
 
@@ -336,8 +334,6 @@ $treinos = $conexao->query($sql);
         </div>
 
     </div>
-
-    <h3>Exercícios do treino</h3>
 
     <!-- Lista dinâmica de exercícios -->
     <div id="lista-exercicios">

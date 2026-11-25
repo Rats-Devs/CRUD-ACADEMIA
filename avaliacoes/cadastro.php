@@ -193,6 +193,14 @@
     </div>
   <?php endif; ?>
 
+  <?php if (isset($_GET["erro"]) && $_GET["erro"] == "exclusao"): ?>
+      <p class="mensagem-erro">Não foi possível excluir a avaliação física.</p>
+  <?php endif; ?>
+
+  <?php if (isset($_GET["erro"]) && $_GET["erro"] == "id_invalido"): ?>
+      <p class="mensagem-erro">ID da avaliação física inválido.</p>
+  <?php endif; ?>
+
     <div class="tabela-wrapper">
         <table class="table-content">
             <thead>
@@ -232,7 +240,10 @@
             <div class="actions-container">
               <a href="visualizar.php?id=<?php echo $linha["ID_AVALIACAO"]; ?>" class="action-link">Visualizar</a> <br>
               <a href="editar.php?id=<?php echo $linha["ID_AVALIACAO"]; ?>" class="action-link">Editar</a> <br>
-              <a href="deletar.php?id=<?php echo $linha["ID_AVALIACAO"]; ?>" class="action-link delete-link" onclick="return confirm('Deseja excluir?')">Deletar</a>
+             <form action="deletar.php" method="POST" onsubmit="return confirm('Deseja excluir esta avaliação física?')">
+                <input type="hidden" name="id" value="<?php echo $linha["ID_AVALIACAO"]; ?>">
+                <button type="submit" class="action-link delete-link">Deletar</button>
+              </form>
             </div>
           </td>
           </tr>
